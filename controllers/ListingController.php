@@ -158,7 +158,7 @@ class ListingController extends Controller
             if (empty($errors)) {
                 $images = [];
                 if (!empty($_FILES['images'])) {
-                    $uploadDir = 'uploads/listings/';
+                    $uploadDir =  __DIR__."/../uploads/listings/";
                     if (!is_dir($uploadDir)) {
                         mkdir($uploadDir, 0777, true);
                     }
@@ -169,7 +169,7 @@ class ListingController extends Controller
                             $filepath = $uploadDir . $filename;
                             
                             if (move_uploaded_file($tmp_name, $filepath)) {
-                                $images[] = $filepath;
+                                $images[] = 'uploads/listings/' . $filename;
                             }
                         }
                     }
@@ -336,7 +336,7 @@ class ListingController extends Controller
             if (empty($errors)) {
                 $images = [];
                 if (!empty($_FILES['images'])) {
-                    $uploadDir = 'uploads/listings/';
+                    $uploadDir = __DIR__ . '/../uploads/listings/';
                     if (!is_dir($uploadDir)) {
                         mkdir($uploadDir, 0777, true);
                     }
@@ -347,7 +347,7 @@ class ListingController extends Controller
                             $filepath = $uploadDir . $filename;
                             
                             if (move_uploaded_file($tmp_name, $filepath)) {
-                                $images[] = $filepath;
+                                $images[] = 'uploads/listings/' . $filename;
                             }
                         }
                     }

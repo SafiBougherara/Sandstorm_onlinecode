@@ -57,7 +57,7 @@
                                 {% for image in listing.images %}
                                 <div class="col-4">
                                     <div class="position-relative">
-                                        <img src="/uploads/listings/{{ image.image_path }}" class="img-thumbnail" alt="Image {{ loop.index }}">
+                                        <img src="{{ __DIR__ }}/uploads/listings/{{ image.image_path }}" class="img-thumbnail" alt="Image {{ loop.index }}">
                                         <div class="form-check position-absolute top-0 end-0 m-2">
                                             <input class="form-check-input" type="checkbox" name="delete_images[]" value="{{ image.id }}" id="delete_image_{{ image.id }}">
                                             <label class="form-check-label" for="delete_image_{{ image.id }}">
