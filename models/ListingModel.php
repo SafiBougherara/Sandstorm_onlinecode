@@ -55,6 +55,17 @@ class ListingModel extends Model
     /**
      * Get all listings with pagination and sorting
      */
+    public function getAllListingsForAdmin(): array
+    {
+        $query = "SELECT l.*, u.username as owner_username
+                 FROM {$this->table} l
+                 JOIN users u ON l.user_id = u.id
+                 ORDER BY l.created_at DESC";
+
+        $stmt = $this->db->query($query);
+        return $stmt->fetchAll(PDO::FETCH_OBJ);
+    }
+
     public function getAllListings(int $page = 1, int $perPage = 12, string $sort = 'newest'): array
     {
         $offset = ($page - 1) * $perPage;

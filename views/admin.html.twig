@@ -38,7 +38,7 @@
                     </td>
                     <td>{{ listing.created_at|date("d/m/Y H:i") }}</td>
                     <td>
-                        <form method="POST" action="/listing/{{ listing.id }}/delete" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce listing ?');">
+                        <form method="POST" action="/listing/{{listing.id}}/delete" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce listing ?');">
                             <button type="submit" class="btn btn-danger btn-sm">Supprimer</button>
                         </form>
                     </td>

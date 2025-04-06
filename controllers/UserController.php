@@ -124,7 +124,7 @@ class UserController extends Controller
         $data = [
             "title" => "Admin Panel",
             "username" => $_SESSION['username'],
-            "listings" => $this->listingModel->getAllListings()
+            "listings" => $this->listingModel->getAllListingsForAdmin()
         ];
 
         $this->render("admin.html.twig", $data);
