@@ -123,7 +123,8 @@ class UserController extends Controller
         // Only accessible if user is logged in (handled by AuthMiddleware)
         $data = [
             "title" => "Admin Panel",
-            "users" => $this->userModel->getAllUsers()
+            "username" => $_SESSION['username'],
+            "listings" => $this->listingModel->getAllListings()
         ];
 
         $this->render("admin.html.twig", $data);

@@ -55,8 +55,7 @@ class UserModel extends Model {
 Modèles Principaux :
 - `UserModel` : Authentification et gestion des utilisateurs
 - `CategoryModel` : Opérations sur les catégories
-- `ListingModel` : Annonces du marketplace
-- `MessageModel` : Système de messagerie
+- `ListingModel` : Annonces du marketplace et gestion des images
 
 ### 4. Contrôleurs
 Les contrôleurs étendent la classe `Controller` :
@@ -79,7 +78,13 @@ Contrôleurs Principaux :
 - Situées dans `views/`
 - Utilise le moteur de template Twig
 - Template de base : `base.html.twig`
-- Exemple :
+- Organisation des vues :
+  - `admin*.html.twig` : Interfaces d'administration
+  - `listing/` : Templates spécifiques aux annonces
+  - `user/` : Templates de gestion utilisateur
+  - `assets/` : Ressources statiques (CSS, JS, images)
+
+Exemple de template :
 ```twig
 {% extends "base.html.twig" %}
 {% block content %}
