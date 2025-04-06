@@ -32,6 +32,7 @@ class UserController extends Controller
                     $_SESSION['user_id'] = $user->id;
                     $_SESSION['username'] = $user->username;
                     $_SESSION['email'] = $user->email;
+                    $_SESSION['role'] = $user->role;
                     
                     header('Location: /');
                     exit;

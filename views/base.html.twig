@@ -28,6 +28,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/sell">Sell</a>
                     </li>
+                    {% if session.role == 1 %}
+                    <li class="nav-item">
+                        <a class="nav-link text-primary" href="/admin"><i class="bi bi-shield-lock"></i> Administration</a>
+                    </li>
+                    {% endif %}
                     {% endif %}
                 </ul>
                 <div class="d-flex align-items-center">

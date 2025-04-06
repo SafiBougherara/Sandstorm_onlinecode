@@ -246,8 +246,8 @@ class ListingController extends Controller
         // Get the listing
         $listing = $this->listingModel->getListingDetails($id);
         
-        // Check if listing exists and belongs to user
-        if (!$listing || $listing->user_id != $_SESSION['user_id']) {
+        // Check if listing exists and if user has permission to delete it (admin or owner)
+        if (!$listing || ($_SESSION['role'] != 1 && $listing->user_id != $_SESSION['user_id'])) {
             header('Location: /my-listings');
             exit;
         }
@@ -283,8 +283,8 @@ class ListingController extends Controller
         // Get the listing
         $listing = $this->listingModel->getListingDetails($id);
         
-        // Check if listing exists and belongs to user
-        if (!$listing || $listing->user_id != $_SESSION['user_id']) {
+        // Check if listing exists and if user has permission to delete it (admin or owner)
+        if (!$listing || ($_SESSION['role'] != 1 && $listing->user_id != $_SESSION['user_id'])) {
             header('Location: /my-listings');
             exit;
         }
@@ -313,8 +313,8 @@ class ListingController extends Controller
         // Get the listing
         $listing = $this->listingModel->getListingDetails($id);
         
-        // Check if listing exists and belongs to user
-        if (!$listing || $listing->user_id != $_SESSION['user_id']) {
+        // Check if listing exists and if user has permission to delete it (admin or owner)
+        if (!$listing || ($_SESSION['role'] != 1 && $listing->user_id != $_SESSION['user_id'])) {
             header('Location: /my-listings');
             exit;
         }

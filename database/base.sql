@@ -4,6 +4,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `mail` varchar(255) NOT NULL,
   `pass` varchar(255) NOT NULL,
   `username` varchar(50) NOT NULL,
+  `role` tinyint NOT NULL DEFAULT 0,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
