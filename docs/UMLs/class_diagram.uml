@@ -1,0 +1,91 @@
+@startuml
+
+package Models {
+
+  class Model {
+    - PDO $db
+    - string $table
+    + __construct(PDO $db, string $table)
+    + findById(int $id, bool $fetchAsObject = true)
+    + findAll(bool $fetchAsObject = true): array
+    + create(array $columns, ...$values): ?int
+  }
+
+  class UserModel extends Model {
+    + __construct(PDO $db)
+    + getUserByEmail(string $email, bool $fetchAsObject = true)
+    + getUserById(int $id, bool $fetchAsObject = true)
+    + getAllUsers()
+    + register(string $username, string $email, string $password): ?int
+  }
+
+  class CategoryModel extends Model {
+    + __construct(PDO $db)
+    + getAllWithCounts(): array
+    + getBySlug(string $slug, bool $withCount = false): ?object
+    + getSubcategories(int $parentId): array
+  }
+
+  class ListingModel extends Model {
+    + __construct(PDO $db)
+    + createListing(array $data, array $images = []): ?int
+  }
+
+}
+
+package Controllers {
+
+  class Controller {
+    - Environment $twig
+    - PDO $db
+    + __construct(PDO $database)
+    + render(string $template, array $data = [])
+    + setSession(string $key, $value): void
+    + getSession(string $key, $default = null)
+    + deleteSession(string $key): void
+  }
+
+  class UserController extends Controller {
+    - UserModel $userModel
+    - ListingModel $listingModel
+    + __construct($db)
+    + login()
+  }
+
+  class ListingController extends Controller {
+    - ListingModel $listingModel
+    - CategoryModel $categoryModel
+    + __construct($db)
+    + browse()
+  }
+
+  class CategoryController extends Controller {
+    - CategoryModel $categoryModel
+    - ListingModel $listingModel
+    + __construct($db)
+    + index()
+    + view(string $slug)
+  }
+
+  class HomeController extends Controller {
+    - CategoryModel $categoryModel
+    - ListingModel $listingModel
+    + __construct(PDO $database)
+    + index()
+  }
+
+}
+
+package Middlewares {
+
+  class AdminMiddleware {
+    + static auth()
+  }
+
+  class AuthMiddleware {
+    + static auth()
+  }
+
+}
+
+@enduml

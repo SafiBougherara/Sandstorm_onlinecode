@@ -1,0 +1,32 @@
+@startuml
+
+actor Utilisateur
+Utilisateur -> UserController: connexion()
+activate UserController
+
+UserController -> AuthMiddleware: authentifier()
+activate AuthMiddleware
+AuthMiddleware --> UserController: Authentifié
+
+UserController -> UserModel: authentifier(email, mot de passe)
+activate UserModel
+UserModel --> UserController: userId
+
+deactivate UserModel
+
+alt userId est valide
+    UserController -> UserModel: getUserById(userId)
+    activate UserModel
+    UserModel --> UserController: Utilisateur
+    deactivate UserModel
+
+    UserController -> Session: setSession(utilisateur)
+    UserController --> Utilisateur: Rediriger vers Accueil
+else userId est invalide
+    UserController --> Utilisateur: Afficher message d'erreur
+end
+
+deactivate UserController
+deactivate AuthMiddleware
+
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+
+actor Utilisateur
+Utilisateur -> ListingController: creerAnnonce(données, images)
+activate ListingController
+
+ListingController -> AuthMiddleware: authentifier()
+activate AuthMiddleware
+AuthMiddleware --> ListingController: Authentifié
+
+deactivate AuthMiddleware
+
+ListingController -> ListingModel: creerAnnonce(données, images)
+activate ListingModel
+ListingModel --> ListingController: idAnnonce
+
+deactivate ListingModel
+
+alt idAnnonce est valide
+    ListingController -> Utilisateur: Afficher message de succès
+else idAnnonce est invalide
+    ListingController -> Utilisateur: Afficher message d'erreur
+end
+
+deactivate ListingController
+
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+
+title Modèle Conceptuel de Données
+
+entity "users" as users {
+  *id : INT
+  --
+  username : VARCHAR
+  mail : VARCHAR
+  pass : VARCHAR
+  created_at : DATETIME
+}
+
+entity "listings" as listings {
+  *id : INT
+  --
+  title : VARCHAR
+  description : TEXT
+  price : DECIMAL
+  location : VARCHAR
+  status : VARCHAR
+  created_at : DATETIME
+  user_id : INT
+  category_id : INT
+}
+
+entity "categories" as categories {
+  *id : INT
+  --
+  name : VARCHAR
+  slug : VARCHAR
+}
+
+entity "listing_images" as listing_images {
+  *id : INT
+  --
+  listing_id : INT
+  image_path : VARCHAR
+  is_primary : BOOLEAN
+}
+
+users ||--o{ listings : "crée"
+listings }o--|| categories : "appartient à"
+listings ||--o{ listing_images : "possède"
+listing_images }o--|| listings : "appartient à"
+
+@enduml

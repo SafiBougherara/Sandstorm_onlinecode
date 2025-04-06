@@ -1,0 +1,70 @@
+@startuml
+
+title Diagramme de la Base de Données
+
+entity "users" as users {
+  *id : INT
+  --
+  mail : VARCHAR(255)
+  pass : VARCHAR(255)
+  username : VARCHAR(50)
+  role : TINYINT
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "categories" as categories {
+  *id : INT
+  --
+  name : VARCHAR(100)
+  slug : VARCHAR(100)
+  icon : VARCHAR(50)
+  description : TEXT
+  parent_id : INT
+  created_at : TIMESTAMP
+}
+
+entity "listings" as listings {
+  *id : INT
+  --
+  title : VARCHAR(255)
+  description : TEXT
+  price : DECIMAL(10,2)
+  location : VARCHAR(255)
+  user_id : INT
+  category_id : INT
+  status : ENUM('active','sold','expired','draft')
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "listing_images" as listing_images {
+  *id : INT
+  --
+  listing_id : INT
+  image_path : VARCHAR(255)
+  is_primary : TINYINT(1)
+  created_at : TIMESTAMP
+}
+
+entity "reviews" as reviews {
+  *id : INT
+  --
+  reviewer_id : INT
+  reviewed_id : INT
+  listing_id : INT
+  rating : TINYINT
+  comment : TEXT
+  created_at : TIMESTAMP
+}
+
+users ||--o{ listings : "1:n"
+listings }o--|| categories : "n:1"
+categories ||--o{ categories : "1:n"
+listings ||--o{ listing_images : "1:n"
+listing_images }o--|| listings : "n:1"
+reviews }o--|| listings : "n:1"
+reviews }o--|| users : "n:1"
+reviews }o--|| users : "n:1"
+
+@enduml

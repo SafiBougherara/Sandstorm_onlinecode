@@ -1,7 +1,7 @@
 # Documentation de l'Architecture Sandstorm
 
 ## Vue d'ensemble
-Sandstorm est une application de marketplace moderne construite avec PHP 8.2+ utilisant un framework MVC personnalisé (LightMVC). Ce document explique l'architecture, les composants et comment étendre l'application.
+Sandstorm est une application de marketplace moderne construite avec PHP 8.2+ utilisant un framework MVC personnalisé (BaseMVC). Ce document explique l'architecture, les composants et comment étendre l'application.
 
 ## Structure du Projet
 ```
