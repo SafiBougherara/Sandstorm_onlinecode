@@ -2,6 +2,7 @@
 namespace Controllers;
 use Models\UserModel;
 use Models\ListingModel;
+use Middlewares\AdminMiddleware;
 
 class UserController extends Controller
 {
@@ -121,7 +122,8 @@ class UserController extends Controller
      */
     public function admin()
     {
-        // Only accessible if user is logged in (handled by AuthMiddleware)
+        // Only accessible if user is logged in and is admin
+        AdminMiddleware::auth();
         $data = [
             "title" => "Admin Panel",
             "username" => $_SESSION['username'],
