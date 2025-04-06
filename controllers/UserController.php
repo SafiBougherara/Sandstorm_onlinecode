@@ -66,7 +66,8 @@ class UserController extends Controller
 
             if (!empty($username) && !empty($email) && !empty($password) && !empty($passwordConfirm)) {
                 if ($password === $passwordConfirm) {
-                    if (strlen($password) >= 8) {
+                    $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+\-])[A-Za-z\d@$!%*?&+\-]{8,}$/';
+                    if (preg_match($passwordPattern, $password)) {
                         try {
                             if ($this->userModel->getUserByEmail($email)) {
                                 $error = 'Email déjà enregistré';
@@ -89,7 +90,7 @@ class UserController extends Controller
                             $error = 'Erreur d\'inscription: ' . $e->getMessage();
                         }
                     } else {
-                        $error = 'Le mot de passe doit contenir au moins 8 caractères';
+                        $error = 'Le mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&+-)';
                     }
                 } else {
                     $error = 'Les mots de passe ne correspondent pas';
@@ -202,10 +203,11 @@ class UserController extends Controller
 
                     // Handle password change if requested
                     if (!empty($newPassword)) {
-                        if (strlen($newPassword) < 8) {
-                            $error = 'New password must be at least 8 characters long';
+                        $passwordPattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&+\-])[A-Za-z\d@$!%*?&+\-]{8,}$/';
+                        if (!preg_match($passwordPattern, $newPassword)) {
+                            $error = 'Le nouveau mot de passe doit contenir au moins 8 caractères, une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&)';
                         } else if ($newPassword !== $newPasswordConfirm) {
-                            $error = 'New passwords do not match';
+                            $error = 'Les mots de passe ne correspondent pas';
                         } else {
                             // Update password separately
                             $this->userModel->changePassword($_SESSION['user_id'], $newPassword);
