@@ -142,6 +142,9 @@ SCREENSHOTS/
 
 ![{653E9147-41D1-41EC-B130-9DAB78F19382}](https://github.com/user-attachments/assets/6b063a77-7adf-48b2-a6fd-b57746e3f6b6)
 
+![{A8A88167-4632-4893-9E60-D96ED8429265}](https://github.com/user-attachments/assets/b09e1a26-ce3a-45ab-8f88-88ff1ba18c74)
+
+
 ## 🤝 Contributions
 
 Les contributions sont les bienvenues ! Veuillez lire notre [Guide de Contribution](CONTRIBUTING.md) pour plus de détails.
